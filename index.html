@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>myBrella</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="assets/images/favicon.png" />
+
+
+    <!-- Bootstrap Ref -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous"></script>
+
+
+    <!-- Bootstrap Ref -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+    <!-- Firebase Ref -->
+
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC|Bad+Script|Bangers|Bevan|Comfortaa|Permanent+Marker|Ranga"
+        rel="stylesheet">
+
+    <script src="logic.js"></script>
+    <link rel="stylesheet" href="./assets/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <br>
+
+        <!-- Jumbotron -->
+        <div class="jumbotron">
+            <!-- <h1 class="text-left">myBrella</h1> -->
+            <div id="title-container">
+                <h1 id="title" class="text-center">
+                    <span id="yo">myBrella</span>
+                </h1>
+            </div>
+        </div>
+
+        <span id='subTitle'>Get only the notifications you need. When you need them.</span>
+        <div class="row">
+
+            <!-- Sign-Up Card-->
+            <div class="col-lg-6 sm-12">
+                <div class="card card-default ">
+                    <div class="card-header">
+                        Sign up for myBrella
+                    </div>
+                    <div class="card-body cloudBG">
+
+                        <!-- Sign-up Form (note the various input "types")-->
+                        <form role="form">
+                            <div class="form-group row">
+                                <label for="name-input">Name:</label>
+                                <input class="form-control" id="name-input" type="text">
+                            </div>
+                            <div class="form-group row">
+                                <label for="zip-input">Zip:</label>
+                                <input class="form-control" id="zip-input" type="text">
+                            </div>
+                            <div class="form-group row">
+                                <label for="phone-input">Phone:</label>
+                                <input class="form-control" id="phone-input" type="tel">
+                            </div>
+                            <div class="form-group row">
+                                <label for="textTime-input">Text Time</label>
+                                <input class="form-control" id="textTime-input" type="time">
+                                <!-- <textarea class="form-control" id="comment-input" rows="5"></textarea> -->
+                            </div>
+                            <div id='checkboxTop'>Text me. . .</div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="rain" name="weatherOption" value="rain">
+                                <label class="form-check-label" for="rain">When I need my umbrella (rain and storms)</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="storms" name="weatherOption" value="storms">
+                                <label class="form-check-label" for="storms">When its storming (thunderstorms only)</label>
+                            </div>
+                            <br>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="cold" name="weatherOption" value="cold">
+                                <label class="form-check-label" for="cold">When its cold outside (under 55 degrees)</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="warm" name="weatherOption" value="warm">
+                                <label class="form-check-label" for="warm">When its hot outside (over 90 degrees)</label>
+                            </div>
+                            <br>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="daily" name="weatherOption" value="daily">
+                                <label class="form-check-label" for="daily">Send me daily weather updates.</label>
+                            </div>
+                            <br>
+                            <button class="btn btn-info" id="submit-input" type="submit">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="card mx-auto " style="align-self:flex-start; width: 18rem;" id='weatherCard'>
+                <h4>Notifications Selected:</h4>
+                <div class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div id="image-rain" class="d-none">
+                            <img class="d-block w-100" src="assets/images/rain.gif" alt="Rain slide" />
+                        </div>
+                        <div id="image-storms" class="d-none">
+                            <img class="d-block w-100" src="assets/images/storms.gif" alt="Storms slide" />
+                        </div>
+                        <div id="image-cold" class="d-none">
+                            <img class="d-block w-100" src="assets/images/snow.gif" alt="Cold slide" />
+                        </div>
+                        <div id="image-warm" class="d-none">
+                            <img class="d-block w-100" src="assets/images/sun.gif" alt="Warm slide" />
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="card-title memberhead">Member Information</h4>
+                    <table class="table table-striped">
+
+                        <tbody>
+                            <tr>
+                                <th id="name-display" scope="row">Member Name:</th>
+                            </tr>
+                            <tr>
+                                <th id="city-display" scope="row">City:</th>
+                            </tr>
+                            <tr>
+                                <th id="time-display" scope="row">Text Time:</th>
+                            </tr>
+                            <th id="currWeath" scope="row"></th>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- <h6 id="name-display">Member Name:</h4>
+                    <h6 id="city-display">City:</h4>
+                    <h6 id="time-display">Text Time:</h4>
+                    <p id='currWeath'></p>       -->
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="modalConf" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="ModalLabel"></h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body" id='modalBody'>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="modalUns" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">We're sad to see you go :(</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Enter your phone number below to delete it from our records
+                            <div class="form-group row">
+                                <input class="form-control" id="un-input" type="tel">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" id='unSubmit'>Submit</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <button type="button" class="btn btn-primary mx-auto" id='un'>Unsubscribe from myBrella</button>
+        </div>
+    </div>
+
+</body>
+
+</html>
